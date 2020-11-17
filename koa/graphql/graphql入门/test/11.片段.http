@@ -1,0 +1,59 @@
+
+### 片段 fragment
+@url = http://localhost:3000/graphql
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    leftComparsion: getUserByName(name: "任盈盈"){
+        # 使用片段, 已经查询到了结果, 在这里使用片段
+        ...entity
+    }
+    rightComparsion: getUserByName(name: "令狐冲"){
+        ...entity
+    }
+}
+fragment entity on UserType {
+    # 这里定义了一个查询片段, 且类型为 UserType, 就是
+    # UserType 的片段, 定义一个UerType的片段 entity, 
+    # 在上面进行使用, 返回的数据还是 UserType类型, 可以只是 UserType 的一部分
+    name
+}
+### 片段 fragment 中使用变量
+@url = http://localhost:3000/graphql
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query ($name: String){
+    leftComparsion: getUserByName(name: $name){
+        # 这实际上更加印证了 片段查询定义好了以后, 
+        # 在这里从片段中查询, 采用参数查询.
+        # 只是从结果中进行再查询
+        ...entity
+    }
+    rightComparsion: getUserByName(name: $name){
+        ...entity
+    }
+}
+fragment entity on UserType {
+    name
+}
+
+{"name": "令狐冲"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

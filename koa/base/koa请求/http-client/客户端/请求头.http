@@ -1,0 +1,9 @@
+# https://github.com/Huachao/vscode-restclient
+# 请求的 服务器文件 在 koa\base\koa请求
+### 请求头 ResquestHeaders
+GET http://localhost:3000/comments
+    ?page=2
+    &pageSize=10
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Content-Type: application/json

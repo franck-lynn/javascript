@@ -1,0 +1,12 @@
+
+### 测试拿到整个 books
+POST http://localhost:3000/graphql HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  books{
+    title
+    author
+  }
+}

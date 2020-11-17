@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "server": "nodemon -r esm app.js"
+    }
+}

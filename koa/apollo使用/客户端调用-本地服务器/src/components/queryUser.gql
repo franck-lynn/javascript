@@ -1,0 +1,5 @@
+query{
+    usersByName(name: "赵敏"){
+        name
+    }
+}

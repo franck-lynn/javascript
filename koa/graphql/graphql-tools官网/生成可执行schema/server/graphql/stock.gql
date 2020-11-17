@@ -1,0 +1,19 @@
+type Stock {
+    id: Int!
+    description: String!
+    catalog_number: String!
+    qty: Int!
+    manufacturer: String
+    supply: String!
+}
+
+
+type Query {
+    stocks: [Stock]
+    stock1(id: Int!): Stock
+    stock2(id: Int!): Stock
+}
+
+type Mutation {
+    updateStock (stockId: Int!): Stock
+}

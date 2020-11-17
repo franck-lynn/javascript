@@ -1,0 +1,11 @@
+{
+    "type": "module",
+    "scripts": {
+        "dev": "node index.js --experimental_top_level_await",
+        "test": "node index.js --harmony_top_level_await",
+        "dev-a": "nodemon index.js --experimental_top_level_await",
+        "test-a": "nodemon index.js --harmony_top_level_await",
+        "dev-b": "nodemon index.js --experimental_top_level_await",
+        "test-b": "nodemon index.js --harmony_top_level_await"
+    }
+}

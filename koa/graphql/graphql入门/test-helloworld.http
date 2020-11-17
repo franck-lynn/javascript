@@ -1,0 +1,20 @@
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query{
+  hello
+  accountName
+  age
+  account{
+      name
+      age
+      sex
+      department
+  }
+}
+
+# 注意几点: 
+# 1, Content-Type: application/json
+#    X-REQUEST-TYPE: GraphQL 不要有分号,  u奥找 REST Client 示例中来, vscode 扩展里有说明
+# 要求 post 提交

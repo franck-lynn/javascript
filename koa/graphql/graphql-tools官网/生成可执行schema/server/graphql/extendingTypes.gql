@@ -1,0 +1,23 @@
+#  继承的类型
+# 原来定义的类型
+type Bar {
+    id: Int
+}
+
+# 查询类型
+type Query {
+    bars: [Bar]
+}
+
+schema {
+    query: Query
+}
+
+# 新增加的类型
+type Foo {
+    id: String!
+}
+
+extend type Query {
+    foos: [Foo]
+}

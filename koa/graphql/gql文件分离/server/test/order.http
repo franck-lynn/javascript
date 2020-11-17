@@ -1,0 +1,14 @@
+
+### 测试拿到整个 order
+POST http://localhost:3000/graphql HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  orders{
+    _id
+    name
+    catalog_number
+    amount
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OAuth tutorials</title>
+    <style>
+        body {
+            font-family: arial;
+            margin: 0;
+        }
+
+        nav {
+            background: #ff5353;
+            padding: 20px 10px;
+        }
+
+        nav ul {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        nav li {
+            list-style-type: none;
+            display: inline-block;
+            margin: 0 10px 0 0;
+        }
+
+        nav a {
+            color: #fff;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+
+        main,
+        header {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 10px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <%if(user) {%>
+            <li><a href="/logout">Logout</a></li>
+            <%} else {%>
+            <li><a href="/login">Login</a></li>
+            <%}%>
+            <li><a href="/">Homepage</a></li>
+    </ul>
+</nav>
+<header>
+    <h1>Login using... </h1>
+</header>
+<main>
+    <!-- <a class="github-btn" href="/github">Github鉴权</a> -->
+    <form action="/login" method="post">
+        <div>
+            <label for="email">登录邮箱: </label>
+            <input type="email" name="email" id="email" placeholder="请输入邮箱" required value="zs@163.com">
+        </div>
+        <div>
+            <label for="password">密码: </label>
+            <input type="password" name="password" id="password" placeholder="请输入密码" required value="aaa">
+            <button type="submit"> 提交 </button>
+        </div>
+    </form>
+    
+</main>
+
+</body>
+</html>

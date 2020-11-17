@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>09.通过浏览器发送带变量</title>
+</head>
+
+<body>
+    <script>
+        const query = `
+            query($name: String!){
+                # 使用这个变量
+                usersByName(name: $name){
+                    name
+                    birthday
+                }
+            }
+        `
+        fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query,
+                variables: { "name": "赵敏" },
+            })
+        }).then(r => r.json()).then(data => console.log("数据返回: ", data))
+    </script>
+</body>
+
+</html>

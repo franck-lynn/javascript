@@ -1,0 +1,35 @@
+### 自定义的日期标量
+@url = http://localhost:3000/graphql
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query {
+    getDate
+}
+
+### 自定义的日期标量
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+# 对象字面量时自定义标量的解析
+mutation {
+    setDate(date: "2021-01-01")
+}
+
+### 自定义的日期标量
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+# 对象字面量时自定义标量的解析
+mutation ($date: DateType){
+    setDate(date: $date)
+}
+
+# 要空一行
+{ "date": "2021-01-02" }

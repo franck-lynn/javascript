@@ -1,0 +1,47 @@
+@url = http://localhost:3000/graphql
+### 查询 
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+    author(id: 2){
+        firstName
+        posts{
+            title
+        }
+    }
+}
+### 查询 
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+    getAuthor(id: 1){
+        firstName
+        posts{
+            title
+            author{
+                firstName
+            }
+        }
+    }
+}
+### 上面是关于帖子的查询
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+    me{
+        id
+        name
+        age
+        blogs{
+            title
+        }
+    }
+}
+
+

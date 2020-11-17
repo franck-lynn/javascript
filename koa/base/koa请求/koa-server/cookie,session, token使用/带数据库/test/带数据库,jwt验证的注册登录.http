@@ -1,0 +1,47 @@
+
+@url = http://localhost:3000
+@json = Content-Type: application/json
+
+@prefix = api
+
+
+### 查询所有用户
+GET {{url}}/{{prefix}}/users HTTP/1.1
+
+### 根据 :id 查询, findById
+GET {{url}}/{{prefix}}/path/5fa2799c0b4d230cdcbedd24 HTTP/1.1
+
+### 注册请求
+POST {{url}}/{{prefix}}/register HTTP/1.1
+{{json}}
+
+{
+    "name": "赵敏",
+    "email": "zhaomin@163.com",
+    "mobile": 13912345678,
+    "password": "123"
+}
+
+
+### 登录请求
+# 命名这个登录请求
+# @name login
+POST {{url}}/{{prefix}}/login HTTP/1.1
+{{json}}
+
+{
+    "name": "周芷若",
+    "email": "zj@163.com",
+    "password": "123"
+}
+
+### 个人信息
+# 获取上面请求返回的数据
+@token = {{login.response.body.token}}
+GET {{url}}/{{prefix}}/profile HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+
+
+

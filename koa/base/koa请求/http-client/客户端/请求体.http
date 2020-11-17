@@ -1,0 +1,15 @@
+# https://github.com/Huachao/vscode-restclient
+# 请求的 服务器文件 在 koa\base\koa请求
+### 请求头
+# 在浏览器中, 就是指 form 表单提交的数据.
+# 或者 axios等直接请求的数据
+POST http://localhost:3000/comments HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+
+

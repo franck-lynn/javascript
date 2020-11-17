@@ -1,0 +1,18 @@
+GET http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+### 请求字符串是? ?key=value
+GET http://localhost:3000/users?name=任盈盈&age=20 HTTP/1.1
+Content-Type: application/json
+
+### 请求参数 : 
+GET http://localhost:3000/users/5eaa26919e6c4313b4e8efb4 HTTP/1.1
+Content-Type: application/json
+
+### 请求体 : 
+POST http://localhost:3000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "post请求体"
+}

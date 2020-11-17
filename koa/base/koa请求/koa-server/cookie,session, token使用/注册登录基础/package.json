@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "dev": "nodemon -r esm 简单注册登录.js"
+    }
+}

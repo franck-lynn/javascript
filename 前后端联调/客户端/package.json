@@ -1,0 +1,11 @@
+{
+    "name": "vue3.0-init",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "build": "webpack -r esm",
+        "dev": "webpack-dev-server -r esm --open",
+        "server": "nodemon -r esm  .\\..\\服务器端\\app.js",
+        "test": "concurrently \"npm run dev\" \"npm run server\""
+    }
+}

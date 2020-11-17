@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>登录</title>
+</head>
+
+<body>
+    <h1>Login 登录</h1>
+    <!-- 如有错误信息, 在这里显示错误信息 -->
+    <% if(message) { %>
+        <%= message %>
+    <% } %>
+        
+    <form action="/login" method="post">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required value="zs@163.com">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required value="aaa">
+        </div>
+        <button type="submit">登录</button>
+    </form>
+
+    <a href="/register">去注册</a>
+</body>
+
+</html>

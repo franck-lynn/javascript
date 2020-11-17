@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>register</title>
+</head>
+<body>
+    <h1>注册 Register</h1>
+    <form action="/register" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required  value="zs" >
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required value="zs@163.com" >
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required value="aaa" >
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    
+    <a href="/login">请Login</a>
+</body>
+</html>

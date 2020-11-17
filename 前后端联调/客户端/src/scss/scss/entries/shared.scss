@@ -1,0 +1,9 @@
+//! 图标文件导入总结, 以下的步骤都是需要的, 缺一不可:
+//! 1, 在 App.vue 中导入总的全局 css 样式 文件 shared.scss 
+//! 2, 阿里妈妈下载的图标文件夹解压改名称为 iconfont, 
+//! 3, 使用别名的文件夹
+//! 4, 要带 .css 后缀名
+//! 5, 样式导入后要加 ; 号
+@import 'scss/stylesheets/iconfont/iconfont.css';
+// @import '../variables/_context-menu_variable.scss';
+@import '~bulma/bulma.sass';

@@ -1,0 +1,7 @@
+# https://github.com/Huachao/vscode-restclient
+# 不支持二进制的 x-www-form-urlencoded
+# 这也是通常由表单进行提交的
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+name=foo&password=bar

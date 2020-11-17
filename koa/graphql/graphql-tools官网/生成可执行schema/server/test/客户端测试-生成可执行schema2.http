@@ -1,0 +1,71 @@
+@url = http://localhost:3000/graphql
+### 查询所有 posts
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  posts{
+    id
+    title
+    votes
+  }
+}
+### 根据 id 查询 作者
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  author(id: 2){
+    firstName
+    lastName
+    posts {
+      title
+      votes
+    }
+  }
+}
+### 顶贴的函数
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+# !!! 这里的 mutation 是小写的, 每请求一次数量 +1
+
+mutation{
+  upvotePost(postId: 1){
+    title
+    votes
+  }
+}
+
+# ### Author 解析器不是这样用的, 而是在 
+# 查询 author 时, 根据 author.id 查询 posts 表
+#  相当于多表查询
+# POST {{url}} HTTP/1.1
+# X-Request-Type: GraphQL
+# Content-Type: application/json
+ 
+# {
+#   posts(author: {id: 1}){
+#     title
+#     votes
+#   }
+# }
+
+### 查询所有 posts
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  posts{
+    id
+    title
+    votes
+    author{
+      firstName
+      lastName
+    }
+  }
+}

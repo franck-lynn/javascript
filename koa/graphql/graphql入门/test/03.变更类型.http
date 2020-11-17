@@ -1,0 +1,53 @@
+### 变更图片
+# 首先得想增加一个消息才能查询变更
+@url = https://api.github.com/graphql
+
+# 命名的登录请求
+# @name  messageId
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+mutation {
+    createMessage(input: {
+        author: "andy"
+        content: "顾妈说是去展会, 实际上是去泡妞"
+    }){
+        id
+        content
+        author
+    }
+}
+
+### 根据 id 查询
+# @id = {{messageId.response.body.id}}
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    getMessage(id: "e94675bdeb8ea4895f79"){
+        author
+        content
+    }
+}
+### 根据 id 修改
+# @id = {{messageId.response.body.id}}
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+mutation {
+    updateMessage(id: "e94675bdeb8ea4895f79", input: {
+        author: "安迪"
+        content: "修改后的数据"
+    }){
+        author
+        content
+    }
+}
+
+
+
+
+

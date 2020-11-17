@@ -1,0 +1,10 @@
+# https://github.com/Huachao/vscode-restclient
+
+GET https://localhost:443 HTTP/1.1
+
+###
+GET https://localhost HTTP/1.1
+
+
+
+

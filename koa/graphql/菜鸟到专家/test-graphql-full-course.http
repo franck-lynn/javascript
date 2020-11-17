@@ -1,0 +1,65 @@
+
+### 查询书籍
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+  book(id:2){
+    name
+    genre
+    authorId
+    author{
+      name
+      age
+      id
+    }
+  }
+}
+
+
+### 查询作者
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    author(id: 3){
+        name
+        age
+        books{
+            name
+            genre
+        }
+    }
+}
+
+### 查询所有书籍
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    books{
+        name
+        author{
+            name
+            age
+        }
+    }
+}
+
+
+### 查询所有作者
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    authors{
+        name
+        books{
+            name
+        }
+    }
+}

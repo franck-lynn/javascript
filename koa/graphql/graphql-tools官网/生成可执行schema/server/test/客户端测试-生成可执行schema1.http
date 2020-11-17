@@ -1,0 +1,47 @@
+@url = http://localhost:3000/graphql
+### 查询所有库存
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  stocks{
+    id
+    description
+    catalog_number
+    manufacturer
+    qty
+    supply
+  }
+}
+### 修改字段
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+mutation{
+  updateStock(stockId: 2){
+    catalog_number
+    qty
+  }
+}
+### 根据 id 查库存
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  stock1(id: 2){
+    catalog_number
+  }
+}
+### 根据 id 查库存
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+  stock2(id: 2){
+    catalog_number
+  }
+}

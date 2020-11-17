@@ -1,0 +1,14 @@
+ @import '~css-vars/css-vars.scss';
+
+ $color-text-primary: #3a3c42;
+ @include css-vars((--color-bg-primary: #d0d6df,
+         --color-bg-primary-offset: #f1f3f7,
+         --color-bg-secondary: #fff,
+        // --color-bg-secondary: pink,
+         --color-text-primary:$color-text-primary,
+         --color-text-primary-offset: #898c94,
+         --color-orange: #dc9960,
+         --color-green: #1eb8b1,
+         --color-purple: #657cc4,
+         --color-black: $color-text-primary,
+         --color-red: #d92027));

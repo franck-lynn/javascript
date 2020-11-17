@@ -1,0 +1,11 @@
+
+
+type Order {
+    _id: ID!
+    name: String!
+    catalog_number: String!
+    amount: Int!
+}
+type Query {
+    orders: [Order]
+}

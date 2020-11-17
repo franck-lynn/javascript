@@ -1,0 +1,109 @@
+### 查询
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    users @include( if :true) {
+        name
+        birthday
+    }
+}
+### 查询
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    users @include( if :false) {
+        name
+        birthday
+    }
+}
+
+### 查询
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    usersById(_id: "0002")  @include( if :true) {
+        name
+        birthday
+    }
+}
+### 查询
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+# 定义一个变量 $id, 相当于函数参数, ID! 是类型
+query($id: ID!){
+    # 使用这个变量
+    usersById(_id: $id) {
+        name
+        birthday
+    }
+}
+
+# 要空一行
+{ "id": "0002" }
+
+### 查询
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+# 定义一个变量 $id, 相当于函数参数, ID! 是类型
+query($name: String!){
+    # 使用这个变量
+    usersByName(name: $name){
+        name
+        birthday
+    }
+}
+
+# 这里上面要空一行
+{
+    "name": "赵敏"
+}
+
+
+###
+# POST https://api.github.com/graphql
+# Content-Type: application/json
+# Authorization: Bearer xxx
+# X-REQUEST-TYPE: GraphQL
+
+# query ($name: String!, $owner: String!) {
+#   repository(name: $name, owner: $owner) {
+#     name
+#     fullName: nameWithOwner
+#     description
+#     diskUsage
+#     forkCount
+#     stargazers(first: 5) {
+#         totalCount
+#         nodes {
+#             login
+#             name
+#         }
+#     }
+#     watchers {
+#         totalCount
+#     }
+#   }
+# }
+
+# {
+#     "name": "vscode-restclient",
+#     "owner": "Huachao"
+# }
+
+
+
+
+
+
+
+

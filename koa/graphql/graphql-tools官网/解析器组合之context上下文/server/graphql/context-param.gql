@@ -1,0 +1,35 @@
+
+# apollo server 官网上的示例
+# https://www.apollographql.com/docs/apollo-server/data/resolvers/
+# 使用Apollo GraphQL服务器进行身份验证的JWT令牌
+# https://www.teaspect.com/detail/5164
+# jwt跨域身份验证_如何使用GraphQL Cookies和JWT进行身份验证
+# https://blog.csdn.net/cuk0051/article/details/108340009
+
+type Query {
+    numberSix: Int! # 总是返回数字 6
+    numberSeven: Int! # 总是返回数字 7
+    user(id: ID!): User
+    libraries: [Library]
+}
+
+
+type User {
+    id: ID!
+    name: String
+}
+
+# A library has a branch and books
+type Library {
+    branch: String!
+    books: [Book]
+}
+# A book has a title and author
+type Book {
+    title: String!
+    author: Author!
+}
+# An author has a name
+type Author { 
+    name: String!
+ }

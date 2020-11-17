@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>form-data请求之 -multipart/form-data</title>
+</head>
+
+<body>
+    <h3>上传图片到文件1</h3>
+    <form action="/upload01" enctype="multipart/form-data" method="post">
+        <input type="file" name='file' accept="image/*" />
+        <button type="submit">upload</button>
+    </form>
+</body>
+</html>

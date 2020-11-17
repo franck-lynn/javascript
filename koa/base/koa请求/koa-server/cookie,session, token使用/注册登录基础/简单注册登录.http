@@ -1,0 +1,45 @@
+
+@url = http://localhost:3000
+@json = Content-Type: application/json
+@prefix = api
+
+### 查询所有用户
+GET {{url}}/{{prefix}}/users HTTP/1.1
+
+### 根据 :id 查询, findById
+GET {{url}}/{{prefix}}/path/1604542335561 HTTP/1.1
+
+### 注册请求 {{json}} 是指的是 @json = Content-Type: application/json
+POST {{url}}/{{prefix}}/register HTTP/1.1
+{{json}} 
+
+{
+    "name": "赵敏",
+    "email": "zhaomin@163.com",
+    "mobile": 13912345678,
+    "password": "123"
+}
+
+
+### 登录请求
+# 命名这个登录请求  {{json}} 是指的是 @json = Content-Type: application/json
+# @name login
+POST {{url}}/{{prefix}}/login HTTP/1.1
+{{json}}
+
+{
+    "name": "周芷若",
+    "email": "zj@163.com",
+    "password": "123"
+}
+
+### 个人信息
+# 获取上面请求返回的数据
+# 获取 命名的 login 响应体里返回的数据 token, 把这个 token 放在请求头里
+@token = {{login.response.body.token}}
+@user = {{login.response.body.user}}
+GET {{url}}/{{prefix}}/profile HTTP/1.1
+# 获取 命名的 login 响应体里返回的数据 token, 把这个 token 放在请求头里
+Authorization: Bearer {{token}}
+Content-Type: application/json
+

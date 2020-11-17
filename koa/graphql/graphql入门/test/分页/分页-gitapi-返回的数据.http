@@ -1,0 +1,100 @@
+###
+@url = http://localhost:3000/graphql
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    feed(filter: "QL"){
+        id
+        description
+        url
+        postedBy{
+            name
+        }
+    }
+}
+
+### 分页查询
+# https://github.com/leighhalliday/apollo-pagination-demo/blob/master/src/client.js
+# 
+POST https://api.github.com/graphql HTTP/1.1
+Content-Type: application/json
+Authorization: {{$dotenv %TOKEN}}
+X-Request-Type: GraphQL
+
+query {
+  __schema {
+    types {
+      name
+      kind
+      description
+      fields {
+        name
+      }
+    }
+  }
+}
+
+### 浏览器中运行
+# https://developer.github.com/v4/explorer/
+# query { 
+#   viewer { 
+#     login
+#   }
+# }
+###
+
+# Lookup TOKEN from local machine environment
+POST https://api.github.com/graphql HTTP/1.1
+Content-Type: application/json
+Authorization: {{$dotenv %TOKEN}}
+X-Request-Type: GraphQL
+
+{
+    viewer{
+        repositories(first: 2){
+            edges{
+                repository:node{
+                    name
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

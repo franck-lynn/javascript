@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>01.查询与变更-通过浏览器发送</title>
+</head>
+
+<body>
+    <script>
+        fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ query: "{hello}" })
+        }).then(r => r.json()).then(data => console.log("数据返回: ", data))
+    </script>
+
+</body>
+
+</html>

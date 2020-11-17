@@ -1,0 +1,35 @@
+###
+@url = http://localhost:3000/graphql
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    feed(filter: "Accept"){
+        name
+        description
+        kind
+        fields{
+            name
+        }
+    }
+}
+
+###
+@url = http://localhost:3000/graphql
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    # 分页查询
+    posts(
+        page: 6
+        pageSize: 9
+    ){
+        name
+        description
+    }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>02.传递参数</title>
+</head>
+<body>
+    <script>
+        const dice = 3
+        const sides = 6
+        // 相当于定义查询的函数
+        const query = `
+            query RollDice($dice: Int!, $sides: Int){
+                rollDice(numDice: $dice, numSides: $sides)
+            }
+        `
+        fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                // 相当于运行函数, 并传入参数的值
+                query, 
+                variables: {dice, sides}
+            })
+        }).then(r => r.json())
+          .then(data => console.log("返回的数据:---> ", data))
+    </script>
+</body>
+</html>

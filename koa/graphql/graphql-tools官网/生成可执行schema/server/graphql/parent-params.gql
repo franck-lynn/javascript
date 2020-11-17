@@ -1,0 +1,24 @@
+type User{
+    id: Int!
+    name: String
+    age: Int!
+    friend: String
+}
+
+type Blog{
+    id: Int!
+    title: String
+}
+
+extend type User {
+    blogs: [Blog]
+}
+extend type Blog{
+    author: User
+}
+
+
+type Query {
+    # 定义查询函数的 schema
+    me: [User]
+}

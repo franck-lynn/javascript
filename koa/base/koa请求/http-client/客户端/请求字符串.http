@@ -1,0 +1,9 @@
+# https://github.com/Huachao/vscode-restclient
+# 请求的 服务器文件 在 koa\base\koa请求
+### 请求字符串 request strings
+GET http://localhost:3000/comments?page=2&pageSize=10
+
+### 请求字符串2, 这样分段也可以
+GET http://localhost:3000/comments
+    ?page=2
+    &pageSize=10

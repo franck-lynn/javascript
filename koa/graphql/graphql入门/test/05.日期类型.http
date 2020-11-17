@@ -1,0 +1,13 @@
+### 认证和中间件
+@url = https://api.github.com/graphql
+
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    getUser{
+        name
+        birthDate
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "dev": "nodemon -r esm 自定义的日期标量.js"
+    }
+}

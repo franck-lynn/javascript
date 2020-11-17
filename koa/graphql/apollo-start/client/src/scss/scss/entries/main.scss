@@ -1,0 +1,4 @@
+//! 导入 veriable, mixins等 的入口文件
+// 别名导入报错, 不知什么原因
+@import '../variables/components_prefix.scss';
+@import '../variables/_context-menu_variable.scss';

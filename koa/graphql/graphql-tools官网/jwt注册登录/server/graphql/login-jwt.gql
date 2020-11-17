@@ -1,0 +1,32 @@
+
+# apollo server 官网上的示例
+# https://www.apollographql.com/docs/apollo-server/data/resolvers/
+# 使用Apollo GraphQL服务器进行身份验证的JWT令牌
+# https://www.teaspect.com/detail/5164
+# jwt跨域身份验证_如何使用GraphQL Cookies和JWT进行身份验证
+# https://blog.csdn.net/cuk0051/article/details/108340009
+# https://flaviocopes.com/graphql-auth-apollo-jwt-cookies/    英文版
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    password: String!
+}
+type Todo {
+    id: ID!
+    userId: ID!
+    title: String!
+}
+type Query {
+    todos: [Todo]
+    users: [User]
+}
+type Mutation {
+    addUser(
+        id: ID
+        name: String
+        email: String
+        password: String
+    ): User
+}

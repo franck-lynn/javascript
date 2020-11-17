@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        function fib(x) {
+            if(x <= 0) return 0
+            if(x <= 2) return 1
+            return fib(x -1) + fib(x - 2)
+        }
+        console.time("测试 fib 速度: ")
+        console.log(fib(40))
+        console.timeEnd("测试 fib 速度: ")
+    </script>
+</body>
+</html>

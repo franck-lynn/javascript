@@ -1,0 +1,28 @@
+type Author {
+    id: Int!
+    firstName: String  # 字段名称要与数据库中字段的名称一致
+    lastName: String
+    """
+    这个作者的帖子
+    """
+    posts: [Post]
+}
+
+type Post{
+    id: Int!
+    title: String
+    author: Author
+    votes: Int
+}
+
+# 查询的 schema
+type Query {
+    posts: [Post]
+    author(id: Int!): Author
+    getAuthor(id: Int!): Author
+}
+#  变更的 schema
+ type Mutation {
+     upvotePost(postId: Int!): Post
+ }
+

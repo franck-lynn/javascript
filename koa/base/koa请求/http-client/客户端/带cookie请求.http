@@ -1,0 +1,10 @@
+# https://github.com/Huachao/vscode-restclient
+# https://www.jianshu.com/p/e92adfcde6ca
+# https://zhuanlan.zhihu.com/p/54266685
+# REST Client 测试（vscode插件）
+# https://www.jianshu.com/p/be63bb085844
+GET http://localhost:3000/cookie HTTP/1.1
+Cookie: username="zs"
+
+
+

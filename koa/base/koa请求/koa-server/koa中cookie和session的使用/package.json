@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "dev-app1": "nodemon -r esm app1.js"
+    }
+}

@@ -1,0 +1,73 @@
+@url = http://localhost:3000/graphql
+
+
+### 登录请求
+# 命名这个登录请求  {{json}} 是指的是 @json = Content-Type: application/json
+# @name login
+POST {{url}} HTTP/1.1
+X-Request-Type: GraphQL
+Content-Type: application/json
+
+{
+    "name": "周芷若",
+    "email": "zj@163.com",
+    "password": "123"
+}
+
+
+ 
+### rest client 官方请求示例
+# github 上的token
+POST https://api.github.com/graphql
+Content-Type: application/json
+Authorization: {{$dotenv %TOKEN}}
+X-Request-Type: GraphQL
+
+query ($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    name
+    fullName: nameWithOwner
+    description
+    diskUsage
+    forkCount
+    stargazers(first: 5) {
+        totalCount
+        nodes {
+            login
+            name
+        }
+    }
+    watchers {
+        totalCount
+    }
+  }
+}
+
+{
+    "name": "vue3.0",
+    "owner": "franck-lynn"
+}
+
+
+### 上下文参数, !!! 不能是中文
+# @token = {{login.response.body.token}}
+@token = "this is a pesudo token"
+# @user = {{login.response.body.user}}
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+X-Request-Type: GraphQL
+
+{
+    libraries{
+        branch
+        books {
+            # 需要子字段
+            author{
+                name
+            }
+        }
+    }
+}
+
+

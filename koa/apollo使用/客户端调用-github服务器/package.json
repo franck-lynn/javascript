@@ -1,0 +1,11 @@
+{
+    "name": "vue3.0-init",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "build": "webpack -r esm",
+        "dev": "webpack-dev-server -r esm --open",
+        "server": "nodemon -r esm  .\\..\\..\\graphql\\graphql入门\\src\\自定义类型\\使用自定义的类型.js",
+        "test": "concurrently \"npm run dev\" \"npm run server\""
+    }
+}
