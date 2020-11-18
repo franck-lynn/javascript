@@ -1,0 +1,6 @@
+{
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon schema委托示例.js --experimental_top_level_await"
+    }
+}

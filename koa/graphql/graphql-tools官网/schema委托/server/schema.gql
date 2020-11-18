@@ -1,0 +1,49 @@
+# subschema
+type Repository {
+    id: ID!
+    url: String
+    issues: [Issue]
+    userId: ID!
+}
+type Issue{
+    id: ID!
+    text: String!
+    repository: Repository!
+}
+type Query {
+    # 根据 id 查询仓库, 只是查询 仓库
+    repositoryById(id: ID!): Repository
+    # 根据用户 id 查询仓库, 这个用户建立了哪些仓库
+    repsitoriesByUserId(id: ID!): [Repository]
+}
+
+# parent schema
+type Repository {
+  id: ID!
+  url: String
+  issues: [Issue] # 这个仓库下有多少 issues
+  userId: ID!
+  user: User
+}
+type Issue {
+  id: ID!
+  text: String!
+  repository: Repository! # 这个 issue 属于哪个仓库下面的
+}
+type User {
+  id: ID!
+  username: String
+  repositories: [Repository] # 用户建立了 多少仓库
+}
+
+type Query {
+  userById(id: ID!): User # 根据用户 id 查询用户
+}
+
+# type User {
+#     id: ID!
+#     username: String
+# }
+# type Query {
+#     userById(id: ID!): User
+# }

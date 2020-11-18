@@ -9,7 +9,6 @@ X-Request-Type: GraphQL
     hello
 }
 ### 测试指令解析器
-@url = http://localhost:3000/graphql
 
 POST {{url}} HTTP/1.1
 Content-Type: application/json
@@ -17,4 +16,15 @@ X-Request-Type: GraphQL
 
 query UPPER_HELLO{
     hello
+}
+
+
+### 多指令解析器
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    foo
 }

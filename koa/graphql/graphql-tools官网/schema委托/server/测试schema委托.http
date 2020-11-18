@@ -1,0 +1,21 @@
+@url = http://localhost:3000/graphql
+### 委托查询
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    userById(id: "u-1"){
+        id 
+        username
+        # repositories{
+        #     repsitoryId
+        # }
+        repositories{
+            url
+            issues{
+                text
+            }
+        }
+    }
+}
