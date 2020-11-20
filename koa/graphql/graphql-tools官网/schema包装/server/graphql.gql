@@ -1,0 +1,37 @@
+# old schema
+type Test {
+    id: ID!
+    name: String
+}
+type Query {
+    returnTest: Test
+}
+#  new schema
+type NewTest {
+    id: ID!
+    name: String
+}
+type Query {
+    returnTest: NewTest
+}
+
+
+"""
+原来的查询
+query {
+    returnTest {
+        id
+        name
+    }
+}
+新的查询
+query {
+    returnTest {
+        id
+        ... on NewTest {
+            name
+        }
+    }
+}
+"""
+

@@ -1,0 +1,29 @@
+# 使用自定义的标量
+scalar DecimalType
+# 使用标量库里的标量 https: //github.com/excitement-engineer/graphql-iso-date/
+scalar DateType
+# scalar Date
+
+type Event {
+    _id: ID!
+    title: String!
+    description: String!
+    price: DecimalType!
+    date: DateType
+    # date: Date
+}
+input EventInput {
+    title: String!
+    description: String!
+    price: DecimalType!
+    date: DateType
+    # date: Date
+    creator: String
+}
+type Query {
+    events: [Event!]
+}
+type Mutation {
+    createEvent(eventInput: EventInput): Event
+    # createUser(userInput: UserInput): User
+}

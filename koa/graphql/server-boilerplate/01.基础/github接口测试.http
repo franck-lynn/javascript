@@ -1,0 +1,18 @@
+###
+# @url = https://developer.github.com/v4/explorer/
+@url = https://api.github.com/graphql
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{$dotenv %TOKEN}}
+X-Request-Type: GraphQL
+
+{
+    user(login: "franck-lynn" ){
+        bio
+        company,
+        followers{
+            totalCount
+        }
+        createdAt
+    }
+}

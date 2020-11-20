@@ -1,0 +1,103 @@
+###
+@url = http://localhost:3000/graphql
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    events{
+        _id
+        title
+        description
+        date
+        price
+    }
+}
+
+###
+# POST {{url}} HTTP/1.1
+# Content-Type: application/json
+# X-Request-Type: GraphQL
+
+# mutation{
+#     createEvent(name: "zs")
+# }
+
+
+###
+# POST {{url}} HTTP/1.1
+# Content-Type: application/json
+# X-Request-Type: GraphQL
+
+# mutation{
+#     createEvent(eventInput:{
+#         title: "标题"
+#         description: "描述"
+#         price: 1200.00
+#         date: "2020-12-01"
+#     }){
+#         title
+#         description
+#         price
+#         date
+#     }
+# }
+### 注册用户
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+mutation{
+    createUser(userInput:{
+        email: "zhaomin@163.com"
+        password: "12345"
+    }){
+        _id
+        email
+    }
+}
+### $localDatetime 是 http 提供的系统变量
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+Date: {{$localDatetime rfc1123}}
+
+mutation{
+    createEvent(eventInput:{
+        title: "赵敏"
+        description: "赵敏的情敌是周芷若"
+        price: 2000.24
+        # 这个时间是不包含 时分秒的
+        date: "{{$localDatetime 'YYYY-MM-DD'}}"
+        creator: "5fb765a4eea57b147460aa31"
+    }){
+        _id
+    }
+}
+
+
+### 
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+Date: {{$localDatetime rfc1123}}
+
+mutation{
+    createEvent(eventInput:{
+        title: "赵敏"
+        description: "赵敏-周芷若"
+        price: 2000.24
+        # 这个日期串符合 ***自定义*** 的 DateType 类型的要求.
+        # date: "{{$localDatetime 'YYYY-MM-DD:hh:mm:ss.SSS'}}"
+        # 下面这个日期串符合 graphql 要求, 
+        # date: "2017-01-10T21:33:15.233Z"
+        date: "{{$localDatetime 'YYYY-MM-DDThh:mm:ss.SSS'}}" # 不符合  graphql 要求, 符合自定义的要求
+        # date: "{{$localDatetime 'YYYY-MM-DDThh:mm:ss'}}" # 不符合  graphql 要求, 符合自定义的要求
+        # date: "{{$localDatetime 'YYYY-MM-DD'}}"
+        creator: "5fb689eca872812080131aa9"
+    }){
+        _id
+    }
+}

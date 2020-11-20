@@ -17,7 +17,7 @@ Content-Type: application/json
 
  
 ### rest client 官方请求示例
-# github 上的token
+# github 上的 token
 POST https://api.github.com/graphql
 Content-Type: application/json
 Authorization: {{$dotenv %TOKEN}}

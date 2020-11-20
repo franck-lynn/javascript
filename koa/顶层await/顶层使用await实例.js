@@ -2,6 +2,7 @@
 //! 服务器端异步加载 .gql 文件, 
 import { loadSchema } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+
 const schema = await loadSchema('./schema.gql', {
     loaders: [new GraphQLFileLoader()]
 })

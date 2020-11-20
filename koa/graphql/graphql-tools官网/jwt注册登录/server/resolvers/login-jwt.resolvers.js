@@ -50,8 +50,6 @@ const loginJwtResolvers = {
                 // 把这些数据加入数据库
                 return { id, name, email, password }
             }
-
-
         }
     }
 }

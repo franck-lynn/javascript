@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "dev": "nodemon -r esm event-booking-api.js"
+    }
+}

@@ -1,17 +1,18 @@
-// https://www.graphql-tools.com/docs/generate-schema
 import path from 'path'
 import Koa from 'koa'
-// import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-
-import { ApolloServer } from 'apollo-server-koa'
 //! 要建立这2个文件夹， 并各新建index.js文件
-import { typeDefs } from './graphql'
-import { resolvers } from './resolvers'
+// import {typeDefs} from './graphql'
+// import { resolvers } from './resolvers'
 import bodyParser from 'koa-body'
 import session from 'koa-session'
 // 处理静态文件, 静态文件夹一般放是项目文件根目录下的 public
 import koaStatic from 'koa-static'
+import Router from 'koa-router'
+import graphqlHTTP from 'koa-graphql'
+import { print } from 'graphql'
+
+import { wrapSchema, introspectSchema } from '@graphql-tools/wrap';
+
 
 // 连接 mongodb 数据库
 import mongoose from 'mongoose'
@@ -22,31 +23,38 @@ mongoose.connect(url, { useUnifiedTopology: true }, () => console.log('数据库
 // 错误信息, 绑定错误信息处理, 以便定位错误,
 mongoose.connection.on('error', console.error.bind(console, 'mongoDB连接异常'))
 
-
-console.log(resolvers)
-
-// const SECRET_KEY = 'secretkey'
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    // context 上下文对象, 获取执行的上下文
-    // context: ({ ctx }) => {
-    //     // 获取加密后的 id
-    //     const raw = ctx.header.authorization.split(' ').pop() || ''
-    //     try {
-    //         const { id } = jwt.verify(raw, SECRET_KEY)
-    //         // console.log("解析出来的 id 是: ", id)
-    //         return { authScope: id }
-    //     } catch {
-    //         throw new Error('授权token不可用, 请重新登录')
-    //     }
-    // }
-    // 直接把 koa 的 ctx 返回给 各个 resolvers 使用
-    context: ({ctx}) => ctx
+// 远程获取
+const executor = async ({ docuemnt, variables }) => {
+    const query = print(docuemnt)
+    const fetchResult = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, variables })
+    })
+    return fetchResult.json()
+}
+// 异步函数生成 schema
+const schema = async () => wrapSchema({
+    schema: await introspectSchema(executor),
+    executor
 })
 
 const app = new Koa()
+const router = new Router()
 
+router.all('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: true // 是否需要调试
+}))
+
+const routes = app => {
+    app.use(router.routes())
+    app.use(router.allowedMethods())
+}
+// 批量注册路由
+routes(app)
 
 // 设置session
 app.keys = ['super-secret-key']
@@ -56,10 +64,6 @@ app.use(session(app))
 app.use(bodyParser());
 
 
-
-// apollo 服务器注册到 koa app
-server.applyMiddleware({ app })
-
 // 在这个目录下的文件都可以通过服务器对外提供服务, 前端项目也会使用这个html文件, 是做为浏览器的入口文件
 app.use(koaStatic(path.join(__dirname, '../public'), {
     // https://www.npmjs.com/package/koa-static
@@ -68,5 +72,5 @@ app.use(koaStatic(path.join(__dirname, '../public'), {
 }))
 
 app.listen(3000, _ => {
-    console.log(`Server is running at http://localhost:3000${server.graphqlPath}`)
+    console.log(`Server is running at http://localhost:3000/graphql`)
 })
