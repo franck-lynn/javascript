@@ -1,0 +1,11 @@
+type User {
+    username: String!
+    email: String!
+}
+type Query {
+    me: User
+}
+type Mutation {
+    signup(username: String!, email: String!, password: String): String # 注册
+    login(email: String!, password: String!): String  # 登录
+}
