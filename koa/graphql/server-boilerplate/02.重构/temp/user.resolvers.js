@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"
 
-import { User } from '../model/User'
+import { User } from '../model/user'
 
 const userResolver = {
     Mutation: {

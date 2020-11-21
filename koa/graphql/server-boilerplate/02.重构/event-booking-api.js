@@ -28,6 +28,7 @@ mongoose.connection.on('error', console.error.bind(console, 'mongoDB连接异常
 
 import { typeDefs } from './graphql'
 import { resolvers } from './resolvers'
+import { isAuth } from './middleware/is-auth'
 
 
 const schema = makeExecutableSchema({
@@ -38,21 +39,27 @@ const schema = makeExecutableSchema({
 const app = new Koa()
 const router = new Router()
 
+// 设置session
+app.keys = ['super-secret-key']
+app.use(session(app))
+
+// app.use(isAuth)
+
 router.all('/graphql', graphqlHTTP({
     schema: schema,
-    graphiql: true // 是否需要调试
+    graphiql: true, 
+    context: ({ ctx }) => ctx
 }))
 
 const routes = app => {
     app.use(router.routes())
     app.use(router.allowedMethods())
 }
+
+app.use(isAuth)
+
 // 批量注册路由
 routes(app)
-
-// 设置session
-app.keys = ['super-secret-key']
-app.use(session(app))
 
 // body parser
 app.use(bodyParser());

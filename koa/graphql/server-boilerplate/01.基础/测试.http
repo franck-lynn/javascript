@@ -66,7 +66,7 @@ Date: {{$localDatetime rfc1123}}
 mutation{
     createEvent(eventInput:{
         title: "赵敏"
-        description: "赵敏的情敌是周芷若"
+        description: "赵敏-周芷若"
         price: 2000.24
         # 这个时间是不包含 时分秒的
         date: "{{$localDatetime 'YYYY-MM-DD'}}"
@@ -96,7 +96,7 @@ mutation{
         date: "{{$localDatetime 'YYYY-MM-DDThh:mm:ss.SSS'}}" # 不符合  graphql 要求, 符合自定义的要求
         # date: "{{$localDatetime 'YYYY-MM-DDThh:mm:ss'}}" # 不符合  graphql 要求, 符合自定义的要求
         # date: "{{$localDatetime 'YYYY-MM-DD'}}"
-        creator: "5fb689eca872812080131aa9"
+        creator: "5fb765a4eea57b147460aa31"
     }){
         _id
     }

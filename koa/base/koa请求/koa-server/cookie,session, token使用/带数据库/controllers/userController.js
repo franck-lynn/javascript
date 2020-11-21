@@ -25,10 +25,10 @@ const login = async (ctx) => {
         ctx.status = 422
         return ctx.body = {err: '用户名不存在'}
     }
-    const isPasswordvalid = await bcrypt.compare(
+    const isPasswordValid = await bcrypt.compare(
         password, user.password
     )
-    if(!isPasswordvalid){
+    if(!isPasswordValid){
         ctx.status = 422
         return ctx.body = { err: '密码无效' }
     }

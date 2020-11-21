@@ -10,20 +10,17 @@ type Event {
     description: String!
     price: DecimalType!
     date: DateType
-    # date: Date
+    creator: User!
 }
 input EventInput {
     title: String!
     description: String!
     price: DecimalType!
     date: DateType
-    # date: Date
-    creator: String
 }
 type Query {
-    events: [Event!]
+    events: [Event!]!
 }
 type Mutation {
     createEvent(eventInput: EventInput): Event
-    # createUser(userInput: UserInput): User
 }

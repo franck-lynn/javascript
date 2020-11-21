@@ -27,7 +27,7 @@ const User = model('User', userSchema)
 ; (async () => {
     try {
         const users = await User.find()
-        console.log(users)
+        console.log(...users)
     } catch (e) {
         console.log(e)
     }/* finally{

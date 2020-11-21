@@ -1,0 +1,28 @@
+### 注册用户
+POST http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "gaoyuanyuan@163.com",
+    "password": "123"
+}
+
+### 登录
+# @name login
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "zhaomin@163.com",
+    "password": "123"
+}
+
+### 测试欢迎光临
+# 登录成功后, token 返回给了请求体, 所以从请求体中可以拿到这个token
+# 在把这个 token 放到请求头带给服务器查验, 再下面 
+# Authorization: Bearer {{token}} 这可以放置
+@token = {{login.response.body.token}}
+GET http://localhost:3000/profile HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
