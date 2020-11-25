@@ -1,102 +1,59 @@
-@url = http://localhost:3000/graphql
-
-### 测试auth createUser 注册用户, 解析器在 user.resolver.js
-# 首先测试的 user.gql 定义的 createUser
+@url = http://localhost:4000/graphql
+@tokenAuth = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYzAzMjA3LTA1ZTMtNDVjMy05NDM0LWU1YzJjOWE3ZjBmMyIsImlhdCI6MTYwNjAyNDQ0NX0.EG9vlh-eFpGDA2UjvTLUle_mhFS9myd4HstXFvGvebk
+### 测试 signup 注册用户, 返回的是一个 token 字符串
 POST {{url}} HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{tokenAuth}}
 X-Request-Type: GraphQL
 
 mutation{
-    createUser(userInput: {email: "zhaomin@163.com", password: "123"}){
-        email
-        password # 密码设置返回来的是null
+    signup(username: "赵敏", email: "zhaomin@163.com", password: "123"){
+        username
     }
 }
 
 
-### 测试event.gql 定义的 createEvent 定义的方法
+### 查询所有注册用户
+
 POST {{url}} HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{tokenAuth}}
 X-Request-Type: GraphQL
 Date: {{$localDatetime rfc1123}}
 
-mutation{
-    createEvent(eventInput: {
-        title: "购买倚天剑"
-        description: "倚天不出, 谁与争锋"
-        price: "2400.26"
-        date: "{{$localDatetime 'YYYY-MM-DD'}}"
-    }){
-        title
-    }
-}
-### 测试 event.gql 定义的方法 events
-POST {{url}} HTTP/1.1
-Content-Type: application/json
-X-Request-Type: GraphQL
-
 {
-    events{
-        title
+    meUnauth{
+        username
+        email
     }
 }
-### 测试 booking 中定义的方法 bookEvent
-# 根据 事件的id. 查找事件, 找到这个事件后, 和对应的人结合起来
-# 程序是硬编码固定 user 的
-
-POST {{url}} HTTP/1.1
-Content-Type: application/json
-X-Request-Type: GraphQL
-
-mutation{
-    bookEvent(eventId: "5fb86a93001e122d44eab00d"){
-        user{
-            email
-            password
-        }
-        event{
-            title
-            date
-        }
-    }
-}
-
-### 测试 auth, login, 验证授权,  解析器在 user.resolvers.js
+### 测试登录
 # @name login
 POST {{url}} HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{tokenAuth}}
 X-Request-Type: GraphQL
 
-{
+mutation{
     login(email: "zhaomin@163.com", password: "123"){
-        userId
+        username
         token
     }
 }
-### booking.gql 的查询方法
-# 这里登录好后要给 res 返回这个 token, 不然客户端拿不到这个 token
-# context.headers = { authorization: token }. 在 auth.resolvers.js 里
-# 登录后返回
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmI4NjE2MjczOWViYzFlYjQ3MDYxMmUiLCJpYXQiOjE2MDU5MjYzNzIsImV4cCI6MTYwNTkyOTk3Mn0.aWs4iI6t7qOCPS8t6_RGB8wCoAG8DK40YsGaNv_3vQk
-@authToken = {{login.response.headers.token}}
+
+### 测试认证中间件
+@token = {{login.response.headers.token}}
 POST {{url}} HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmI4NjE2MjczOWViYzFlYjQ3MDYxMmUiLCJpYXQiOjE2MDU5MjYzNzIsImV4cCI6MTYwNTkyOTk3Mn0.aWs4iI6t7qOCPS8t6_RGB8wCoAG8DK40YsGaNv_3vQk
-# Authorization: Bearer {{authToken}}
+Authorization: Bearer {{tokenAuth}}
 X-Request-Type: GraphQL
 
 {
-    bookings{
-        user{
-            email
-            password
-        }
-        event{
-            title
-            description
-            price
-            date
-        }
+    me{
+         id
+        username
+        email
+        password
     }
 }
 

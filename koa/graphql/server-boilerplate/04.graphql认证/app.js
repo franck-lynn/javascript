@@ -1,10 +1,5 @@
-// https://github.com/academind/yt-graphql-react-event-booking-api/blob/01-basic-setup/app.js
-// https://github.com/academind/yt-graphql-react-event-booking-api/blob/02-graphql-start/app.js
 import path from 'path'
 import Koa from 'koa'
-//! 要建立这2个文件夹， 并各新建index.js文件
-// import {typeDefs} from './graphql'
-// import { resolvers } from './resolvers'
 import bodyParser from 'koa-body'
 import session from 'koa-session'
 // 处理静态文件, 静态文件夹一般放是项目文件根目录下的 public
@@ -12,23 +7,12 @@ import koaStatic from 'koa-static'
 import Router from 'koa-router'
 import graphqlHTTP from 'koa-graphql'
 
-// 连接 mongodb 数据库
-import mongoose from 'mongoose'
-
-
-// import { DecimalType } from './DecimalType'
-// import { GraphQLDate } from 'graphql-scalars'
-// import { DateType } from './DateType'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-//url 带上复制集
-const url = 'mongodb://localhost:27017/test?replicaSet=my_repl'
-mongoose.connect(url, { useUnifiedTopology: true }, () => console.log('数据库连接成功!'))
-// 错误信息, 绑定错误信息处理, 以便定位错误,
-mongoose.connection.on('error', console.error.bind(console, 'mongoDB连接异常'))
+
 
 import { typeDefs } from './graphql'
 import { resolvers } from './resolvers'
-import { isAuth } from './middleware/is-auth'
+import { auth } from './middleware/auth'
 
 
 const schema = makeExecutableSchema({
@@ -43,12 +27,19 @@ const router = new Router()
 app.keys = ['super-secret-key']
 app.use(session(app))
 
-// app.use(isAuth)
+// https://graphql.cn/learn/serving-over-http/
+// GraphQL 应当被放置在所有身份验证中间件之后，
+// 以便你在 HTTP 入口端点处理器中能够访问到相同的会话和用户信息。
+app.use(auth)
 
-router.all('/graphql', graphqlHTTP({
+// 这里加载认证的中间件
+router.all('/graphql',  graphqlHTTP({
     schema: schema,
     graphiql: true, 
-    context: ({ ctx }) => ctx
+    context: ({ ctx }) =>{
+        console.log("打印ctx上下文.............: ", ctx)
+        return ctx
+    }
 }))
 
 const routes = app => {
@@ -56,12 +47,10 @@ const routes = app => {
     app.use(router.allowedMethods())
 }
 
-app.use(isAuth)
-
 // 批量注册路由
 routes(app)
 
-// body parser
+// body parser`
 app.use(bodyParser());
 
 
@@ -72,8 +61,8 @@ app.use(koaStatic(path.join(__dirname, '../public'), {
     index: 'index.html'
 }))
 
-app.listen(3000, _ => {
-    console.log(`Server is running at http://localhost:3000/graphql`)
+app.listen(4000, _ => {
+    console.log(`Server is running at http://localhost:4000/graphql`)
 })
 
-// nodemon -r esm 01-event-booking-api.js --experimental_top_level_await
+// nodemon -r esm app.js --experimental_top_level_await

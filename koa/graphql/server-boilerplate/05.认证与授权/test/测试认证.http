@@ -1,0 +1,36 @@
+@url = http://localhost:3000/graphql
+
+### 注册是 restful 路由, 进行 post 提交
+POST http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "赵敏",
+    "email": "zhaomin@163.com",
+    "password": "123"
+}
+### 登录是 restful 路由, 进行 post 提交
+# @name login
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "赵敏",
+    "email": "zhaomin@163.com",
+    "password": "123"
+}
+
+### 
+@token = {{login.response.body.token}}
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+X-Request-Type: GraphQL
+
+{
+    me{
+        _id
+        username
+        email
+    }
+}

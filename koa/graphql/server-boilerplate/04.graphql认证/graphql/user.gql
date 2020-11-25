@@ -1,11 +1,15 @@
 type User {
+    id: ID!
     username: String!
     email: String!
+    password: String!
+    token: String
 }
 type Query {
+    meUnauth: [User]
     me: User
 }
 type Mutation {
-    signup(username: String!, email: String!, password: String): String # 注册
-    login(email: String!, password: String!): String  # 登录
+    signup(username: String!, email: String!, password: String!): User # 注册
+    login(email: String!, password: String!): User  # 登录
 }
