@@ -9,6 +9,7 @@ import {server} from './apollo-server'
 import mongoose from 'mongoose'
 // 导入批量路由入口文件
 import routes from './routes'
+import { initialize } from './passport/passport-initialize'
 
 //url 带上复制集
 const url = 'mongodb://localhost:27017/test?replicaSet=my_repl'
@@ -24,6 +25,10 @@ app.use(session(app))
 
 // body parser, 解析请求体, 要在路由注册之前调用
 app.use(bodyParser());
+
+// 初始化 passport
+initialize(app)
+
 // 加载 apollo-server
 server.applyMiddleware({ app })
 

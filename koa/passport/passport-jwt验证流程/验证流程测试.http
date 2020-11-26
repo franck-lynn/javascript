@@ -1,0 +1,15 @@
+### 测试登录
+# @name login
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "赵敏",
+    "email": "zhaomin@163.com",
+    "password": "123"
+}
+### 测试访问
+@token = {{login.response.body.token}}
+GET http://localhost:3000/profile HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}

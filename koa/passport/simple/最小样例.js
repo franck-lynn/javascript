@@ -21,6 +21,7 @@ app.use(session(app))
 //! 1, 定义一个验证用户的策略，需要定义name作为标识
 const naiveStrategy = {
     name: 'naive',
+    // http://localhost:3000/?uid=1 用这个访问
     // 策略的主体就是authenticate(req)函数，在成功的时候返回用户身份，失败的时候返回错误
     authenticate: function (ctx){
         // 通过请求字符串析构
@@ -43,9 +44,8 @@ app.use(passport.initialize())
 // 添加一个koa的中间件，使用naive策略来鉴权。这里暂不使用session
 app.use(passport.authenticate('naive', {session: false}))
 
-
-
 router.get('/', async ctx => {
+    console.log("验证函数: ", ctx.isAuthenticated())
     if (ctx.isAuthenticated() ){
         // ctx.state.user就是鉴权后得到的用户身份
         ctx.body = 'hello ' + JSON.stringify(ctx.state.user)

@@ -1,6 +1,6 @@
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
-import { isAuthenticated } from '../auth/authentication/authenticated-guard'
-import { hasRole } from '../auth/authorization/validate-role'
+import { isAuthenticated } from '../passport/authenticated-guard'
+import { hasRole } from '../passport/has-role'
 
 const userResolver = {
     Query: {
