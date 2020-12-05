@@ -31,5 +31,6 @@ X-Request-Type: GraphQL
     ){
         name
         description
+        hasNextPage
     }
 }

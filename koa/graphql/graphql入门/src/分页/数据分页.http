@@ -1,0 +1,35 @@
+@url = http://localhost:3000/graphql
+### 
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    allPosts(offset: 3){
+        posts{
+            name
+        }
+        totalCount # 总共有多少条记录
+    }
+}
+
+### 
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+{
+    postsPagination( first: 4, after: "允许专业管理员访问1" ){
+        edges{
+            cursor
+            node{
+                name
+                description
+            }
+        }
+        pageInfo{
+            hasNextPage
+        }
+        count
+    }
+}

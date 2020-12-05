@@ -21,7 +21,7 @@ const config = {
             {
                 test: /\.(sc|sa|c)ss$/,
                 use: [
-                    "style-loader", 'css-loader', 'sass-loader',
+                    "style-loader", 'css-loader', { loader: 'sass-loader', options: { implementation: require("sass"), sassOptions: { fiber: false } } },
                     {
                         loader: 'sass-resources-loader',
                         options: {

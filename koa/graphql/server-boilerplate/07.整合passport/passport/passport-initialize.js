@@ -50,18 +50,24 @@ const initialize = (app) => {
     }))
 }
 
-const checkedToken = async (ctx, next) => {
-    console.log(ctx.headers.authorization)
-    return await passport.authenticate('jwt', async (err, user, info, status) => {
+// 把验证 token 加到 context 上下文
+const checkedToken = async (ctx) => {
+    console.log("检查的请求头", ctx.headers.authorization)
+    return await passport.authenticate('jwt', async (err, user/* , info, status */) => {
         // 登录后检查token
         console.log("user = ", user)
         if (user) {
-            return await next()
+            // ctx.state.user = user
+            // console.log("ctx.state.user = ", ctx.state.user)
+            // return user.id
+            ctx.currentUser = user
         } else {
             ctx.body = "你需要重新登录"
         }
     })(ctx)
 }
+
+
 
 // 登录时进行授权的函数, 在登录时使用
 const authenticated = async (ctx) => {
@@ -86,22 +92,4 @@ const authenticated = async (ctx) => {
         }
     })(ctx)
 }
-
-
-// const checkAuthenticated = (ctx, next) => {
-//     console.log("05. 请求头已经带了口令过来了: ", ctx.headers.authorization)
-//     console.log(ctx.isAuthenticated())
-//     if (ctx.isAuthenticated()) {
-//         return next()
-//     }
-//     ctx.body = "没有通过授权"
-// }
-// const checkNotAuthenticated = (ctx, next) => {
-//     if (ctx.isAuthenticated()) {
-//         return ctx.redirect('/profile')
-//     }
-//     //! 要 return next() 才能有下一步的结果
-//     return next()
-// }
-
 export { initialize, authenticated, checkedToken}
